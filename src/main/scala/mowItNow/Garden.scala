@@ -1,18 +1,16 @@
 package mowItNow
 
 import scala.collection.mutable
-import scala.collection.mutable.ArrayBuffer
-
 
 class Garden(x : Int, y : Int) {
-  val mowers = new mutable.Queue[Mower]();
+  val mowers: mutable.Queue[Mower] = new mutable.Queue[Mower]()
 
   /**
-   * Add a mowert to the garder
-   * @param mower
+   * Add a mower to the garden
+   * @param mower Mower
    * @return
    */
-  def addMower(mower : Mower) = {
+  def addMower(mower : Mower): Garden = {
     mowers.addOne(mower)
     this
   }
@@ -20,7 +18,7 @@ class Garden(x : Int, y : Int) {
   /**
    * Execute commands and print position for all mowers
    */
-  def executeMoyers(): Unit ={
+  def executeMowers(): Unit ={
     for(mower <- mowers) {
       // Execute commands
       mower.executeCommands(this.x, this.y)

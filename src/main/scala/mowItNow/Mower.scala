@@ -10,8 +10,8 @@ class Mower(var x: Int,var y: Int, var direction: Direction.Value){
 
   /**
    * Forward action, check if it's still in the garden space or not
-   * @param maxX
-   * @param maxY
+   * @param maxX X max size
+   * @param maxY Y max size
    */
   def A(maxX : Int, maxY : Int): Unit  = {
     direction match {
@@ -25,7 +25,7 @@ class Mower(var x: Int,var y: Int, var direction: Direction.Value){
   /**
    * Left action, just rotate the direction
    */
-  def G: Unit = {
+  def G(): Unit = {
     direction match {
       case Direction.N => direction = Direction.W
       case Direction.S => direction = Direction.E
@@ -37,7 +37,7 @@ class Mower(var x: Int,var y: Int, var direction: Direction.Value){
   /**
    * Right action, just rotate the direction
    */
-  def D: Unit = {
+  def D(): Unit = {
     direction match {
       case Direction.N => direction = Direction.E
       case Direction.S => direction = Direction.W
@@ -48,7 +48,7 @@ class Mower(var x: Int,var y: Int, var direction: Direction.Value){
 
   /**
    * Add a command to the Mower
-   * @param command
+   * @param command COmmand
    */
   def addCommand(command: Char): Unit ={
     programmedCommands.addOne(command)
@@ -56,23 +56,23 @@ class Mower(var x: Int,var y: Int, var direction: Direction.Value){
 
   /**
    * Execute all commands related
-   * @param gridSizeX
-   * @param gridSizeY
+   * @param gridSizeX max size X of the garden
+   * @param gridSizeY max size Y of the garden
    */
   def executeCommands(gridSizeX:Int, gridSizeY:Int): Unit ={
-    while (programmedCommands.length > 0){
+    while (programmedCommands.nonEmpty){
       val command = programmedCommands.dequeue()
       command match {
         case 'A' => this.A(gridSizeX, gridSizeY)
-        case 'G' => this.G
-        case 'D' => this.D
-        case _ => throw new IllegalArgumentException(s"This opperation is not supported $x")
+        case 'G' => this.G()
+        case 'D' => this.D()
+        case _ => throw new IllegalArgumentException(s"This operation is not supported $x")
       }
     }
     println(this)
   }
 
   override def toString: String = {
-  return s"Moyer ${x} ${y} ${direction}"
+    s"Mower $x $y $direction"
   }
 }

@@ -1,13 +1,18 @@
 package mowItNow
-//kaarouimourad@gmail.com
-// Projet Scala - IMSD 2019/2020
 
 
-object Main extends App {
-  val garden = Loader.readFile("/home/jayok/Documents/test")
-  // If the loading didn't work it returns null as value
-  if (garden != null){
-    garden.executeMoyers()
-
+object Main {
+  def main(args: Array[String]): Unit = {
+    // Check arguments
+    if(args.length != 1) {
+      println("Usage: Main filePath")
+      return
+    }
+    // Read garden with filepath passed as parameter
+    val garden = Loader.readFile(args(0))
+    // If the loading didn't work it returns null as value
+    if (garden != null){
+      garden.executeMowers()
+    }
   }
 }
